@@ -1,4 +1,8 @@
 from social_spam import Mail, Telegram
+from environs import Env
+
+env = Env()
+env.read_env()
 
 mail = Mail()
 tg = Telegram()
@@ -7,8 +11,9 @@ tg = Telegram()
 """Подключение к почте и рассылка писем"""
 
 
-email = 'Почта'
-app_password = 'Пароль приложения'
+email = env.str('email')
+app_password = env.str('app_password')
+
 
 mail.connect_mail(email, app_password)
 
@@ -21,9 +26,10 @@ mail.send_message('Почта куда отпарвлять')
 
 # https://my.telegram.org/apps - сайт где взять всю инфу об тг
 
-api_id = ''
-api_hash = ''
-phone = ''
+api_id = env.int('api_id')
+api_hash = env.str('api_hash')
+phone = env.str('phone')
+
 
 tg.connect_user(api_id=api_id, api_hash=api_hash, phone_number=phone)
 
