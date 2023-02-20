@@ -8,6 +8,11 @@ mail = Mail()
 tg = Telegram()
 
 
+"""!!!!!!!!!!!!!!!!!!
+Сделать все в функиях
+!!!!!!!!!!!!!!!!!!"""
+
+
 """Подключение к почте и рассылка писем"""
 
 
@@ -19,6 +24,15 @@ mail.connect_mail(email, app_password)
 
 mail.set_message('Тема сообщения', 'Сообщение')
 mail.send_message('Почта куда отпарвлять')
+
+
+"""Получение почт из txt файла в список"""
+
+email_base = []
+
+with open('base_email.txt', 'r') as base_txt:
+    for line in base_txt:
+        email_base.append(line.strip())
 
 
 """Подключение к тг и рассылка сообщений"""
