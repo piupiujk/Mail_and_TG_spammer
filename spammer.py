@@ -1,5 +1,6 @@
 from social_spam import Mail, Telegram
 from environs import Env
+import csv
 
 env = Env()
 env.read_env()
@@ -26,13 +27,15 @@ mail.set_message('Тема сообщения', 'Сообщение')
 mail.send_message('Почта куда отпарвлять')
 
 
-"""Получение почт из txt файла в список"""
+"""Получение id из csv файла в список"""
 
-email_base = []
+tg_id_base = []
 
-with open('base_email.txt', 'r') as base_txt:
-    for line in base_txt:
-        email_base.append(line.strip())
+with open('user_data.csv', encoding='utf-8') as base_file:
+    base_reader = csv.reader(base_file, delimiter=',')
+    for row in base_reader:
+        tg_id_base.append(row[1])
+    tg_id_base.pop(0)
 
 
 """Подключение к тг и рассылка сообщений"""
